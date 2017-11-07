@@ -1,10 +1,13 @@
 <template>
-  <li class="item" ref="item" :style="itemContractAnimationStyle"
-      :class="{'item-block':isOpen,'item-selected':!isOpen,'item-active':isOpen}">
-    <div class="item-wrapper">
-      <button class="item-btn"></button>
-    </div>
-  </li>
+  <transition name="contract-item-3">
+    <li class="item" ref="item" :style="styleArr" @click="animatedActive"
+        :class="{'item-block':isOpen,'item-selected':!isOpen}">
+      <div class="item-wrapper">
+        <button class="item-btn"></button>
+      </div>
+    </li>
+  </transition>
+
 </template>
 <style lang="stylus" type="text/stylus">
   .item
@@ -16,6 +19,15 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
+  .contract-item-3-enter-active{
+    animation-delay: '1s';
+    animation-duration: '2s';
+    animation-timing-function: 'ease-out';
+    animation-name: 'contract-item-3';
+    animation-fill-mode: 'backwards';
+  }
+
+
     .item-wrapper
       width: 100%;
       height: 100%;
@@ -66,16 +78,12 @@
     },
     data () {
       return {
-        itemContractAnimationStyle: {
-          animationDelay: (this.index * this.itemAnimationDelay) + 's',
-          animationDuration: this.animationDuration + 's',
-          animationTimingFunction: 'ease-out',
-          animationName: 'contract-item-' + this.index,
-          animationFillMode: 'backwards'
-        },
+        styleArr: [],
+
         itemExpandAnimationStyle: {
           animationName: 'expand-item-' + this.index,
-          animationFillMode: 'forwards'
+          animationFillMode: 'forwards',
+          animationDuration: +this.itemAnimationDelay + 's'
         }
       }
 
@@ -117,6 +125,16 @@
         }
       }
     },
+    watch: {
+      isOpen: function () {
+        if (this.isOpen) {
+          this.styleArr.push(this.itemExpandAnimationStyle)
+        } else {
+          this.styleArr.pop()
+        }
+
+      }
+    },
 
     mounted () {
       this.insertStyleSheet()
@@ -126,6 +144,9 @@
     },
 
     methods: {
+      // animatedActive(){
+
+      // },
       toRadians (angle) {
         return angle * (Math.PI / 180)
       },
@@ -158,7 +179,6 @@
 //          '}\n'
         return str
       },
-
       generateSelectItemKeyFrame () {
 //
 //        '.item :nth-of-type(&{(index + 1)} ).is-selected . item-wrapper {' +
@@ -178,16 +198,12 @@
 
       insertStyleSheet () {
         let cssRule = this.generateBaseKeyFrame('expand-item-', this.index)
+        cssRule += this.generateBaseKeyFrame('contract-item-', this.index)
         cssRule += this.genetateAnimateDetail()
         let style = document.createElement('style')
         style.type = 'text/css'
         style.innerHTML = cssRule
         document.head.appendChild(style)
-
-      },
-      useAmination () {
-//        let str = 'expand-item-' + this.index
-//        this.$refs.item.style.animation = str
 
       }
 

@@ -1,7 +1,7 @@
 <template>
 
   <div class="menu-container">
-    <div class="menu-bar-con" >
+    <div class="menu-bar-con">
       <button class="menu-bar-btn" @click="menuClick" v-bind:class="{'btn-active':isOpen}">
         <span class="icon">+</span>
       </button>
