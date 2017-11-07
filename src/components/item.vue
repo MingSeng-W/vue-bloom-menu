@@ -9,6 +9,7 @@
   </transition>
 
 </template>
+
 <style lang="stylus" type="text/stylus">
   .item
     opacity: 1
@@ -42,13 +43,14 @@
         width: 100%;
         height: 100%;
         box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
-        transition: box-shadow .28s cubic-bezier(.4, 0, .2, 1), opacity .28s cubic-bezier(.4, 0, .2, 1);
+        transition: box-shadow .28s cubic-bezier(.4, 0, .2, 1);
+        opacity .28s cubic-bezier(.4, 0, .2, 1);
         background-position: center center;
         background-repeat: no-repeat;
         opacity: 0.8;
-        background-image: url("../common/img/home.svg")
-        background-size: 35
-        outline none
+        background-image: url("../common/img/home.svg");
+        background-size: 55%;
+        outline: none;
         &:hover
           box-shadow: 0 8px 17px 0 rgba(0, 0, 0, .2);
 
@@ -79,11 +81,19 @@
     data () {
       return {
         styleArr: [],
-
         itemExpandAnimationStyle: {
           animationName: 'expand-item-' + this.index,
           animationFillMode: 'forwards',
-          animationDuration: +this.itemAnimationDelay + 's'
+          animationDuration: +this.animationDuration + 's',
+          animationDelay: this.itemAnimationDelay,
+          animationTimingFunction: 'ease-in'
+        },
+        itemContractAnimationStyle: {
+          animationName: 'contract-item-' + this.index,
+          animationFillMode: 'forwards',
+          animationDuration: +this.animationDuration + 's',
+          animationDelay: this.itemAnimationDelay,
+          animationTimingFunction: 'ease-out'
         }
       }
 
@@ -94,9 +104,11 @@
         return this.$store.state.isOpen
       },
       x () {
+        console.log(this.radius * Math.cos(this.toRadians(this.angleCur)));
         return this.radius * Math.cos(this.toRadians(this.angleCur))
       },
       y () {
+        console.log(this.radius * Math.sin(this.toRadians(this.angleCur)));
         return this.radius * Math.sin(this.toRadians(this.angleCur))
       },
       x0 () {
@@ -106,9 +118,11 @@
         return 0
       },
       x2 () {
+        console.log(Number((this.x).toFixed(2)));
         return Number((this.x).toFixed(2))
       },
       y2 () {
+        console.log(Number((this.y).toFixed(2)));
         return Number((this.y).toFixed(2))
       },
       x1 () {
@@ -128,9 +142,17 @@
     watch: {
       isOpen: function () {
         if (this.isOpen) {
+          try {
+            this.styleArr.pop()
+          } catch (e) {
+            // statements
+            console.log(e);
+          }
           this.styleArr.push(this.itemExpandAnimationStyle)
         } else {
           this.styleArr.pop()
+          this.styleArr.push(this.itemContractAnimationStyle)
+
         }
 
       }
@@ -144,16 +166,17 @@
     },
 
     methods: {
-      // animatedActive(){
+      animatedActive() {
 
-      // },
+      },
       toRadians (angle) {
         return angle * (Math.PI / 180)
       },
 
       generateBaseKeyFrame (stage, index) {
-
-        let str = stage + this.index + '{' +
+        let str = ''
+        if (stage === 'expand-item-') {
+          str = stage + this.index + '{' +
           '0% {' +
           'transform: translate(' + this.x0 + 'px,' + this.y0 + 'px)' +
           '}' +
@@ -164,6 +187,19 @@
           'transform: translate(' + this.x2 + 'px,' + this.y2 + 'px)' +
           '}' +
           '}\n'
+        } else {
+          str = stage + this.index + '{' +
+          '100% {' +
+          'transform: translate(' + this.x0 + 'px,' + this.y0 + 'px)' +
+          '}' +
+          '30% {' +
+          'transform: translate(' + this.x1 + 'px,' + this.y1 + 'px)' +
+          '}' +
+          '0% {' +
+          'transform: translate(' + this.x2 + 'px,' + this.y + 'px)' +
+          '}' +
+          '}\n'
+        }
         return '@keyframes ' + str + '@-webkit-keyframes   ' + str
 
       },
@@ -172,7 +208,9 @@
         let str = '.item-active {' +
           'animation-name: ' + 'expand-item-' + this.index + ';' +
           'animation-fill-mode: forwards;' +
-          '}\n'
+          'animation-duration: 0.7s;' +
+          'animation-timing-function: ease-out'
+        '}\n'
 //          '.item-active:nth-of-type(' + (this.index + 1) + ')' + '{' +
 //          '-webkit-animation-name: ' + 'expand-item-' + this.index + ';' +
 //          '-webkit-animation-fill-mode: forwards;' +

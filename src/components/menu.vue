@@ -62,13 +62,13 @@
         default: 90
       },
       radius: {
-        default: 80
+        default: 100
       },
       itemAnimationDelay: {
         default: 0.04
       },
       animationDuration: {
-        default: 0.4
+        default: 0.5
       },
       endAngle: {
         default: 0

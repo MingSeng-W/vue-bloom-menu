@@ -29,6 +29,7 @@ module.exports = {
     'no-unused-vars':0,
     'no-undef':0,
     'no-template-curly-in-string':0,
-    'padded-blocks':0
+    'padded-blocks':0,
+    'itemExpandAnimationStyle':0
   }
 }
