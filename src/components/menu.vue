@@ -132,7 +132,6 @@
       }
 
     },
-
     components: {
       'menu-item': item
 

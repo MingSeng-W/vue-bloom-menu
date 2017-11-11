@@ -15,15 +15,16 @@ Vue.use(Vuex)
 const vstore = new Vuex.Store({
   state: {
     count: 0,
-    isOpen: false
+    isOpen: false,
+    showItem: true
   },
 
   mutations: {
-    increment (state) {
-      state.count++
-    },
     changeState (state) {
       state.isOpen = !state.isOpen
+    },
+    changeState2 (state) {
+      state.showItem = !state.showItem
     }
 
   }

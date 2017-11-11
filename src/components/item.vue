@@ -1,12 +1,11 @@
 <template>
-  <transition name="contract-item-3">
-    <li class="item" ref="item" :style="styleArr" @click="animatedActive"
-        :class="{'item-block':isOpen,'item-selected':!isOpen}">
-      <div class="item-wrapper">
-        <button class="item-btn"></button>
-      </div>
+    <li class="item" ref="item" :style="styleArr" @click="showItem = ! showItem">
+      <transition name="item-selected">
+        <div class="item-wrapper" v-show="showItem" @animationend="animationEnd">
+          <button class="item-btn"></button>
+        </div>
+      </transition>
     </li>
-  </transition>
 
 </template>
 
@@ -20,15 +19,6 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-  .contract-item-3-enter-active{
-    animation-delay: '1s';
-    animation-duration: '2s';
-    animation-timing-function: 'ease-out';
-    animation-name: 'contract-item-3';
-    animation-fill-mode: 'backwards';
-  }
-
-
     .item-wrapper
       width: 100%;
       height: 100%;
@@ -54,9 +44,11 @@
         &:hover
           box-shadow: 0 8px 17px 0 rgba(0, 0, 0, .2);
 
-  .item-block
-    display: block
 
+  .item-selected-leave-active
+    animation-name select-item
+    animation-duration .5s
+    animation-fill-mode forwards
   @keyframes select-item {
     0% {
       transform scale(1)
@@ -67,9 +59,10 @@
       opacity 0
     }
   }
+
+
 </style>
 <script type="text/ecmascript-6">
-
   export default {
     props: {
       radius: Number,
@@ -88,6 +81,7 @@
           animationDelay: this.itemAnimationDelay,
           animationTimingFunction: 'ease-in'
         },
+        showItem: true,
         itemContractAnimationStyle: {
           animationName: 'contract-item-' + this.index,
           animationFillMode: 'forwards',
@@ -104,7 +98,6 @@
         return this.$store.state.isOpen
       },
       x () {
-        console.log(this.radius * Math.cos(this.toRadians(this.angleCur)));
         return this.radius * Math.cos(this.toRadians(this.angleCur))
       },
       y () {
@@ -151,8 +144,9 @@
           this.styleArr.push(this.itemExpandAnimationStyle)
         } else {
           this.styleArr.pop()
-          this.styleArr.push(this.itemContractAnimationStyle)
-
+          if (this.showItem) {
+            this.styleArr.push(this.itemContractAnimationStyle)
+          }
         }
 
       }
@@ -164,15 +158,21 @@
     created () {
 
     },
-
+    updated () {
+      this.itemClicked()
+    },
     methods: {
-      animatedActive() {
-
+      animationEnd() {
+        this.$store.commit('changeState')
+      },
+      itemClicked () {
+        if (!this.$store.state.isOpen && !this.showItem) {
+          this.showItem = true
+        }
       },
       toRadians (angle) {
         return angle * (Math.PI / 180)
       },
-
       generateBaseKeyFrame (stage, index) {
         let str = ''
         if (stage === 'expand-item-') {
