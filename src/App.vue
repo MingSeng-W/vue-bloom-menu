@@ -90,6 +90,8 @@
         tmp.push(this.genarateIconObj(grade, 'grade', '50'))
         tmp.push(this.genarateIconObj(languge, 'languge', '50'))
         tmp.push(this.genarateIconObj(lock, 'lock', '35'))
+        tmp.push(this.genarateIconObj(getApp, 'getApp', '35'))
+        tmp.push(this.genarateIconObj(findInPage, 'findInPage', '40'))
         return tmp
       }
     },

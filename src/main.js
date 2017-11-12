@@ -15,18 +15,13 @@ Vue.use(Vuex)
 const vstore = new Vuex.Store({
   state: {
     count: 0,
-    isOpen: false,
-    showItem: true
+    isOpen: false
   },
 
   mutations: {
     changeState (state) {
       state.isOpen = !state.isOpen
-    },
-    changeState2 (state) {
-      state.showItem = !state.showItem
     }
-
   }
 })
 // const router = new VueRouter({

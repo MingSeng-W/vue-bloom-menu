@@ -1,7 +1,7 @@
 <template>
   <div class="menu-container">
     <div class="menu-bar-con">
-      <button class="menu-bar-btn" @click="menuClick" v-bind:class="{'btn-active':isOpen}">
+      <button class="menu-bar-btn" @click="isOpenChange" v-bind:class="{'btn-active':isOpen}">
         <span class="icon">+</span>
       </button>
     </div>
@@ -13,52 +13,60 @@
          :angleCur="startAngle+angleStep*itemIndex"
          :animationDuration="animationDuration"
          :itemAnimationDelay="0 + (itemIndex * 0.08)"
-         :icon="'icon-'+item.iconName">
+         :icon="'icon-'+item.iconName"
+         :showItem="showItem"
+         :isOpen="isOpen"
+         :total="iconImgArr.length"
+          v-on:showItemChange="showItemChange"
+          v-on:isOpenChange="isOpenChange"
+          v-on:animationCountIncrease="animationCountIncrease"
+      >
       </menu-item>
     </ul>
   </div>
 </template>
 <style lang="stylus" type="text/stylus">
-  .menu-container
-    position absolute
-    top 50%
-    right 50%
-    width 50px
-    height 50px
-    transform 50% 50%
-    user-select none
-    border-radius 50%
-    transition box-shadow .28s cubic-bezier(.4, 0, .2, 1);
-    box-shadow 0 2px 5px 0 rgba(0, 0, 0, .26);
-    padding 0
-    margin 0
-    box-sizing: border-box;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    .menu-bar-con
-      .menu-bar-btn
-        position: absolute;
-        border-radius: 50%;
-        width: 50px;
-        height: 50px;
-        z-index: 1;
-        cursor: pointer;
-        transition: all .28s cubic-bezier(.4, 0, .2, 1);
-        border: none;
-        background-color: #A974A2;
-        color: white
-        outline none
-        &.btn-active
-          transform rotate(45deg);
-        &:hover
-          box-shadow: 0 8px 17px 0 rgba(0, 0, 0, .2);
-        .icon
-          font-size: 32px;
-          line-height: 60%;
-          position: relative;
-    .menu-item-list
-      list-style-type none
+.menu-container
+  position absolute
+  top 50%
+  right 50%
+  width 50px
+  height 50px
+  transform 50% 50%
+  user-select none
+  border-radius 50%
+  transition box-shadow .28s cubic-bezier(.4, 0, .2, 1);
+  box-shadow 0 2px 5px 0 rgba(0, 0, 0, .26);
+  padding 0
+  margin 0
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  .menu-bar-con
+    .menu-bar-btn
+      position: absolute;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      z-index: 1;
+      cursor: pointer;
+      transition: all .28s cubic-bezier(.4, 0, .2, 1);
+      border: none;
+      background-color: #A974A2;
+      color: white
+      outline none
+      &.btn-active
+        transform rotate(45deg)
+      &:hover
+        box-shadow: 0 8px 17px 0 rgba(0, 0, 0, .2);
+      .icon
+        font-size: 32px;
+        line-height: 60%;
+        position: relative;
+  .menu-item-list
+    list-style-type none
 </style>
 <script type="text/ecmascript-6">
+  import Vue from 'vue'
   import item from './item.vue'
   export default {
     props: {
@@ -73,13 +81,14 @@
     },
     data () {
       return {
+        showItem: true,
+        isOpen: false,
+        total: this.iconImgArr.length,
+        count: 0
       }
     },
 
     computed: {
-      isOpen () {
-        return this.$store.state.isOpen
-      },
       angleStep () {
         console.log((this.endAngle - this.startAngle) / (this.itemNum - 1))
         return (this.endAngle - this.startAngle) / (this.itemNum - 1)
@@ -89,12 +98,14 @@
 
 
     },
+    updated () {
+    },
     mounted () {
     },
     created () {
       //      把每个button的背景图片的class插入到html中,方便以后使用。
       let cssRule = ''
-      this.iconImgArr.map((item, index) => {
+      this.iconImgArr.map((item) => {
         cssRule += this.gennerateIconStyle(item)
       })
       let style = document.createElement('style')
@@ -115,12 +126,27 @@
         '}\n'
         return cssRule
       },
+      animationCountIncrease () {
+        this.count++
+        if (this.count === this.total) {
+          this.isOpenChange()
+          setTimeout(() => {
+            this.showItem = true
+          }, 200 * this.total)
+          this.count = 0
+        }
+      },
       menuClose () {
 
       },
-      menuOpen () {
-//        this.changeState()
-
+      showItemChange () {
+        this.showItem = false
+//        this.$nextTick(() => {
+//          this.showItem = true
+//        })
+      },
+      isOpenChange () {
+        this.isOpen = !this.isOpen
       },
       menuRemove () {
 
@@ -128,9 +154,6 @@
 
       menuSetItem () {
 
-      },
-      menuClick () {
-        this.$store.commit('changeState')
       },
       setAmination () {
         let angleCur = this.startAngle

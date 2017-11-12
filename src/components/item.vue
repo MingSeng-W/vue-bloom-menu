@@ -1,7 +1,7 @@
 <template>
-    <li class="item" ref="item" :style="styleArr" @click="showItem = ! showItem">
-      <transition name="item-selected">
-        <div class="item-wrapper" v-show="showItem" @animationend="animationEnd">
+    <li class="item" ref="item" :style="styleArr" @click="changeShowItem">
+      <transition :name="'item-selected'">
+        <div class="item-wrapper" v-show="showItem" :ref="'item'+index" @animationend="animationEnd">
           <button class="item-btn" :class="[icon]"></button>
         </div>
       </transition>
@@ -69,7 +69,10 @@
       index: Number,
       animationDuration: Number,
       itemAnimationDelay: Number,
-      icon: String
+      icon: String,
+      showItem: Boolean,
+      isOpen: Boolean,
+      total: Number
     },
     data () {
       return {
@@ -81,7 +84,7 @@
           animationDelay: this.itemAnimationDelay + 's',
           animationTimingFunction: 'ease-in'
         },
-        showItem: true,
+        animationEndCount: 0,
         itemContractAnimationStyle: {
           animationName: 'contract-item-' + this.index,
           animationFillMode: 'forwards',
@@ -94,9 +97,6 @@
     },
 
     computed: {
-      isOpen () {
-        return this.$store.state.isOpen
-      },
       x () {
         return this.radius * Math.cos(this.toRadians(this.angleCur))
       },
@@ -135,15 +135,14 @@
           try {
             this.styleArr.pop()
           } catch (e) {
-            // statements
-            console.log(e);
+            console.log(e)
           }
           this.styleArr.push(this.itemExpandAnimationStyle)
         } else {
           this.styleArr.pop()
-          if (this.showItem) {
-            this.styleArr.push(this.itemContractAnimationStyle)
-          }
+//          if (!this.showItem) {
+          this.styleArr.push(this.itemContractAnimationStyle)
+//          }
         }
 
       }
@@ -155,17 +154,22 @@
     created () {
 
     },
-    updated () {
-      this.itemClicked()
+    beforeUpdated () {
+//      this.itemClicked()
     },
     methods: {
       animationEnd() {
-        this.$store.commit('changeState')
+        this.$emit('animationCountIncrease')
+      },
+      changeShowItem () {
+        this.$emit('showItemChange')
+//        this.$emit('isOpenChange')
       },
       itemClicked () {
-        if (!this.$store.state.isOpen && !this.showItem) {
-          this.showItem = true
-        }
+//        if (!this.$store.state.isOpen && !this.showItem) {
+//          this.$emit('showItemChange')
+//
+//        }
       },
       toRadians (angle) {
         return angle * (Math.PI / 180)
@@ -193,7 +197,7 @@
           'transform: translate(' + this.x1 + 'px,' + this.y1 + 'px)' +
           '}' +
           '0% {' +
-          'transform: translate(' + this.x2 + 'px,' + this.y + 'px)' +
+          'transform: translate(' + this.x2 + 'px,' + this.y2 + 'px)' +
           '}' +
           '}\n'
         }
@@ -208,10 +212,6 @@
           'animation-duration: 0.7s;' +
           'animation-timing-function: ease-out'
         '}\n'
-//          '.item-active:nth-of-type(' + (this.index + 1) + ')' + '{' +
-//          '-webkit-animation-name: ' + 'expand-item-' + this.index + ';' +
-//          '-webkit-animation-fill-mode: forwards;' +
-//          '}\n'
         return str
       },
       generateSelectItemKeyFrame () {
