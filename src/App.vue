@@ -51,17 +51,19 @@
     computed: {
       iconImgArr () {
         let tmp = []
-        // 分别指定图标的url ,名称， 以及background-size属性
         tmp.push(this.genarateIconObj(home, 'home', '50'))
         tmp.push(this.genarateIconObj(grade, 'grade', '50'))
         tmp.push(this.genarateIconObj(languge, 'languge', '50'))
         tmp.push(this.genarateIconObj(lock, 'lock', '35'))
         tmp.push(this.genarateIconObj(getApp, 'getApp', '35'))
         tmp.push(this.genarateIconObj(findInPage, 'findInPage', '40'))
+        tmp.push(this.genarateIconObj(favorite, 'favorite', '50'))
+        tmp.push(this.genarateIconObj(accessibility, 'accessibility', '50'))
         return tmp
       }
     },
     methods: {
+      // 分别指定图标的url ,名称， 以及background-size属性
       genarateIconObj (url, name, size) {
         let tmp = {}
         tmp.iconUrl = url

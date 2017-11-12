@@ -36,33 +36,33 @@
   transform 50% 50%
   user-select none
   border-radius 50%
-  transition box-shadow .28s cubic-bezier(.4, 0, .2, 1);
-  box-shadow 0 2px 5px 0 rgba(0, 0, 0, .26);
+  transition box-shadow .28s cubic-bezier(.4, 0, .2, 1)
+  box-shadow 0 2px 5px 0 rgba(0, 0, 0, .26)
   padding 0
   margin 0
-  box-sizing: border-box;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  box-sizing border-box
+  -webkit-tap-highlight-color rgba(0, 0, 0, 0)
   .menu-bar-con
     .menu-bar-btn
-      position: absolute;
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
-      z-index: 1;
-      cursor: pointer;
-      transition: all .28s cubic-bezier(.4, 0, .2, 1);
-      border: none;
-      background-color: #A974A2;
-      color: white
+      position absolute
+      border-radius 50%
+      width 50px
+      height 50px
+      z-index 1
+      cursor pointer
+      transition all .28s cubic-bezier(.4, 0, .2, 1)
+      border none
+      background-color #A974A2
+      color white
       outline none
       &.btn-active
         transform rotate(45deg)
       &:hover
-        box-shadow: 0 8px 17px 0 rgba(0, 0, 0, .2);
+        box-shadow 0 8px 17px 0 rgba(0, 0, 0, .2)
       .icon
-        font-size: 32px;
-        line-height: 60%;
-        position: relative;
+        font-size 32px
+        line-height 60%
+        position relative
   .menu-item-list
     list-style-type none
 </style>
@@ -96,14 +96,6 @@
         return (this.endAngle - this.startAngle) / (this.itemNum - 1)
       }
     },
-    beforeMounted () {
-
-
-    },
-    updated () {
-    },
-    mounted () {
-    },
     created () {
       //      把每个button的背景图片的class插入到html中,方便以后使用。
       let cssRule = ''
@@ -117,9 +109,6 @@
     },
 
     methods: {
-      menuRender () {
-
-      },
       // 产生icon的类
       gennerateIconStyle (icon) {
         let cssRule = '.icon-' + icon.iconName + '{' +
@@ -138,25 +127,12 @@
           this.count = 0
         }
       },
-      menuClose () {
-
-      },
       showItemChange (index) {
         this.showItem = false
         this.currentIndex = index
-//        this.$nextTick(() => {
-//          this.showItem = true
-//        })
       },
       isOpenChange () {
         this.isOpen = !this.isOpen
-      },
-      menuRemove () {
-
-      },
-
-      menuSetItem () {
-
       },
       setAmination () {
         let angleCur = this.startAngle

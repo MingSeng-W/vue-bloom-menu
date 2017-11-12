@@ -12,37 +12,36 @@
 <style lang="stylus" type="text/stylus">
 @import "../common/stylus/variable.styl"
 .item
-  opacity: 1
-  position: absolute;
-  bottom: 5px;
-  left: 5px;
-  transition: transform .28s cubic-bezier(.4, 0, .2, 1), box-shadow .28s cubic-bezier(.4, 0, .2, 1), opacity .28s cubic-bezier(.4, 0, .2, 1);
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+  opacity 1
+  position absolute
+  bottom 5px
+  left 5px
+  transition transform .28s cubic-bezier(.4, 0, .2, 1), box-shadow .28s cubic-bezier(.4, 0, .2, 1), opacity .28s cubic-bezier(.4, 0, .2, 1)
+  width 40px
+  height 40px
+  border-radius 50%
   .item-wrapper
-    width: 100%;
-    height: 100%;
-    background-color: #6B9EB8;
-    border-radius: 50%;
+    width 100%
+    height 100%
+    background-color #6B9EB8
+    border-radius 50%
 
     .item-btn
-      cursor: pointer;
-      border-radius: 50%;
-      border: none;
-      background-color: transparent;
-      width: 100%;
-      height: 100%;
-      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
-      transition: box-shadow .28s cubic-bezier(.4, 0, .2, 1);
-      opacity .28s cubic-bezier(.4, 0, .2, 1);
-      background-position: center center;
-      background-repeat: no-repeat;
-      opacity: 0.8;
-
-      outline: none;
+      cursor pointer
+      border-radius 50%
+      border none
+      background-color transparent
+      width 100%
+      height 100%
+      box-shadow 0 2px 5px 0 rgba(0, 0, 0, .26)
+      transition box-shadow .28s cubic-bezier(.4, 0, .2, 1)
+      opacity .28s cubic-bezier(.4, 0, .2, 1)
+      background-position center center
+      background-repeat no-repeat
+      opacity 0.8
+      outline none
       &:hover
-        box-shadow: 0 8px 17px 0 rgba(0, 0, 0, .2);
+        box-shadow 0 8px 17px 0 rgba(0, 0, 0, .2)
 
 .item-selected-leave-active
   animation-name select-item
