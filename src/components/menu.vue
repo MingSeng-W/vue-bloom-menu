@@ -111,7 +111,7 @@
       gennerateIconStyle (icon) {
         let cssRule = '.icon-' + icon.iconName + '{' +
           'background-image: url(' + icon.iconUrl + ');' +
-          'background-size: ' + icon.iconSize + '%; '
+          'background-size: ' + icon.iconSize + '%; ' +
         '}\n'
         return cssRule
       },

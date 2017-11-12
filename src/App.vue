@@ -86,8 +86,10 @@
       iconImgArr () {
         let tmp = []
         // 分别指定图标的url ,名称， 以及background-size属性
-        tmp.push(this.genarateIconObj(home, 'home', '55'))
+        tmp.push(this.genarateIconObj(home, 'home', '50'))
         tmp.push(this.genarateIconObj(grade, 'grade', '50'))
+        tmp.push(this.genarateIconObj(languge, 'languge', '50'))
+        tmp.push(this.genarateIconObj(lock, 'lock', '35'))
         return tmp
       }
     },
@@ -97,7 +99,6 @@
         tmp.iconUrl = url
         tmp.iconName = name
         tmp.iconSize = size
-        tmp.iconAngle = 0
         return tmp
       }
     },
