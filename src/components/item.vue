@@ -2,7 +2,7 @@
     <li class="item" ref="item" :style="styleArr" @click="showItem = ! showItem">
       <transition name="item-selected">
         <div class="item-wrapper" v-show="showItem" @animationend="animationEnd">
-          <button class="item-btn"></button>
+          <button class="item-btn" :class="[icon]"></button>
         </div>
       </transition>
     </li>
@@ -10,55 +10,54 @@
 </template>
 
 <style lang="stylus" type="text/stylus">
-  .item
-    opacity: 1
-    position: absolute;
-    bottom: 5px;
-    left: 5px;
-    transition: transform .28s cubic-bezier(.4, 0, .2, 1), box-shadow .28s cubic-bezier(.4, 0, .2, 1), opacity .28s cubic-bezier(.4, 0, .2, 1);
-    width: 40px;
-    height: 40px;
+@import "../common/stylus/variable.styl"
+.item
+  opacity: 1
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  transition: transform .28s cubic-bezier(.4, 0, .2, 1), box-shadow .28s cubic-bezier(.4, 0, .2, 1), opacity .28s cubic-bezier(.4, 0, .2, 1);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  .item-wrapper
+    width: 100%;
+    height: 100%;
+    background-color: #6B9EB8;
     border-radius: 50%;
-    .item-wrapper
+
+    .item-btn
+      cursor: pointer;
+      border-radius: 50%;
+      border: none;
+      background-color: transparent;
       width: 100%;
       height: 100%;
-      background-color: #6B9EB8;
-      border-radius: 50%;
+      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
+      transition: box-shadow .28s cubic-bezier(.4, 0, .2, 1);
+      opacity .28s cubic-bezier(.4, 0, .2, 1);
+      background-position: center center;
+      background-repeat: no-repeat;
+      opacity: 0.8;
 
-      .item-btn
-        cursor: pointer;
-        border-radius: 50%;
-        border: none;
-        background-color: transparent;
-        width: 100%;
-        height: 100%;
-        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
-        transition: box-shadow .28s cubic-bezier(.4, 0, .2, 1);
-        opacity .28s cubic-bezier(.4, 0, .2, 1);
-        background-position: center center;
-        background-repeat: no-repeat;
-        opacity: 0.8;
-        background-image: url("../common/img/home.svg");
-        background-size: 55%;
-        outline: none;
-        &:hover
-          box-shadow: 0 8px 17px 0 rgba(0, 0, 0, .2);
+      outline: none;
+      &:hover
+        box-shadow: 0 8px 17px 0 rgba(0, 0, 0, .2);
 
-
-  .item-selected-leave-active
-    animation-name select-item
-    animation-duration .5s
-    animation-fill-mode forwards
-  @keyframes select-item {
-    0% {
-      transform scale(1)
-      opacity 1
-    }
-    100% {
-      transform scale(2)
-      opacity 0
-    }
+.item-selected-leave-active
+  animation-name select-item
+  animation-duration animationDuriation
+  animation-fill-mode forwards
+@keyframes select-item {
+  0% {
+    transform scale(1)
+    opacity 1
   }
+  100% {
+    transform scale(2)
+    opacity 0
+  }
+}
 
 
 </style>
@@ -69,7 +68,8 @@
       angleCur: Number,
       index: Number,
       animationDuration: Number,
-      itemAnimationDelay: Number
+      itemAnimationDelay: Number,
+      icon: String
     },
     data () {
       return {
@@ -78,7 +78,7 @@
           animationName: 'expand-item-' + this.index,
           animationFillMode: 'forwards',
           animationDuration: +this.animationDuration + 's',
-          animationDelay: this.itemAnimationDelay,
+          animationDelay: this.itemAnimationDelay + 's',
           animationTimingFunction: 'ease-in'
         },
         showItem: true,
@@ -101,7 +101,6 @@
         return this.radius * Math.cos(this.toRadians(this.angleCur))
       },
       y () {
-        console.log(this.radius * Math.sin(this.toRadians(this.angleCur)));
         return this.radius * Math.sin(this.toRadians(this.angleCur))
       },
       x0 () {
@@ -111,11 +110,9 @@
         return 0
       },
       x2 () {
-        console.log(Number((this.x).toFixed(2)));
         return Number((this.x).toFixed(2))
       },
       y2 () {
-        console.log(Number((this.y).toFixed(2)));
         return Number((this.y).toFixed(2))
       },
       x1 () {

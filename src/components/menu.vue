@@ -1,14 +1,20 @@
 <template>
-
   <div class="menu-container">
     <div class="menu-bar-con">
       <button class="menu-bar-btn" @click="menuClick" v-bind:class="{'btn-active':isOpen}">
         <span class="icon">+</span>
       </button>
     </div>
-    <ul class="menu-item-list">
-      <menu-item :radius="radius" :index=3 :angleCur=0 :animationDuration="animationDuration"
-                 :itemAnimationDelay="itemAnimationDelay"></menu-item>
+    <ul class="menu-item-list" >
+      <menu-item
+        v-for="(item, itemIndex) in iconImgArr"
+        :radius="radius"
+         :index="itemIndex"
+         :angleCur="startAngle+angleStep*itemIndex"
+         :animationDuration="animationDuration"
+         :itemAnimationDelay="0 + (itemIndex * 0.08)"
+         :icon="'icon-'+item.iconName">
+      </menu-item>
     </ul>
   </div>
 </template>
@@ -54,37 +60,19 @@
 </style>
 <script type="text/ecmascript-6">
   import item from './item.vue'
-
   export default {
     props: {
-      startAngel: {
-
-        default: 90
-      },
-      radius: {
-        default: 100
-      },
-      itemAnimationDelay: {
-        default: 0.04
-      },
-      animationDuration: {
-        default: 0.5
-      },
-      endAngle: {
-        default: 0
-      },
-      itemWidth: {
-        default: 50
-      },
-      itemNum: {
-        default: 8
-      }
-
+      startAngle: Number,
+      radius: Number,
+      itemAnimationDelay: Number,
+      animationDuration: Number,
+      endAngle: Number,
+      itemWidth: Number,
+      itemNum: Number,
+      iconImgArr: Array
     },
-
     data () {
       return {
-        msg: 'hello vue'
       }
     },
 
@@ -93,21 +81,39 @@
         return this.$store.state.isOpen
       },
       angleStep () {
-        return (this.startAngel - this.endAngle) / (this.itemNum)
+        console.log((this.endAngle - this.startAngle) / (this.itemNum - 1))
+        return (this.endAngle - this.startAngle) / (this.itemNum - 1)
       }
+    },
+    beforeMounted () {
+
 
     },
-
     mounted () {
-
     },
     created () {
-
+      //      把每个button的背景图片的class插入到html中,方便以后使用。
+      let cssRule = ''
+      this.iconImgArr.map((item, index) => {
+        cssRule += this.gennerateIconStyle(item)
+      })
+      let style = document.createElement('style')
+      style.type = 'text/css'
+      style.innerHTML = cssRule
+      document.head.appendChild(style)
     },
 
     methods: {
       menuRender () {
 
+      },
+      // 产生icon的类
+      gennerateIconStyle (icon) {
+        let cssRule = '.icon-' + icon.iconName + '{' +
+          'background-image: url(' + icon.iconUrl + ');' +
+          'background-size: ' + icon.iconSize + '%; '
+        '}\n'
+        return cssRule
       },
       menuClose () {
 
