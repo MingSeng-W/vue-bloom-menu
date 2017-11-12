@@ -20,6 +20,7 @@
 
 <script type="text/ecmascript-6">
   import menu from 'components/menu.vue'
+  // 图片的icon
   import home from 'common/img/home.svg'
   import favorite from 'common/img/favorite.svg'
   import getApp from 'common/img/get-app.svg'
@@ -28,13 +29,19 @@
   import lock from 'common/img/lock.svg'
   import accessibility from 'common/img/accessibility.svg'
   import findInPage from 'common/img/find-in-page.svg'
+  // 一些基本配置参数
+  // 半径
   const radius = 100
+  // item的开始角度
   const startAngle = 0
+  // menu的结束角度
   const endAngle = 315
+// 项目数量
   const itemNum = 8
   const animationDuration = 0.5
   const itemAnimationDelay = 0
   const itemWidth = 50
+
   export default {
     data() {
       return {

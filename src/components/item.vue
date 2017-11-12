@@ -1,7 +1,7 @@
 <template>
     <li class="item" ref="item" :style="styleArr" @click="changeShowItem">
       <transition :name="currentIndex === index?'item-selected':'item-not-selected'">
-        <div class="item-wrapper" v-show="showItem" :ref="'item'+index" @animationend="animationEnd">
+        <div class="item-wrapper" v-show="showItem"  @animationend="animationEnd">
           <button class="item-btn" :class="[icon]"></button>
         </div>
       </transition>
@@ -50,7 +50,7 @@
 .item-not-selected-leave-active
   animation-name not-select-item
   animation-duration animationDuriation
-  animation-fill-mode forwards
+  animation-fill-mode backwards
 
 @keyframes select-item {
   0% {
@@ -102,10 +102,10 @@
         animationEndCount: 0,
         itemContractAnimationStyle: {
           animationName: 'contract-item-' + this.index,
-          animationFillMode: 'forwards',
+          animationFillMode: 'backwards',
           animationDuration: +this.animationDuration + 's',
           animationDelay: this.itemAnimationDelay + 's',
-          animationTimingFunction: 'ease-in'
+          animationTimingFunction: 'ease-out'
         }
       }
 
@@ -208,11 +208,8 @@
           '100% {' +
           'transform: translate(' + this.x0 + 'px,' + this.y0 + 'px)' +
           '}' +
-          '30% {' +
-          'transform: translate(' + this.x2 + 'px,' + this.y2 + 'px)' +
-          '}' +
           '0% {' +
-          'transform: translate(' + this.x1 + 'px,' + this.y1 + 'px)' +
+          'transform: translate(' + this.x2 + 'px,' + this.y2 + 'px)' +
           '}' +
           '}\n'
         }

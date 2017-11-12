@@ -121,9 +121,6 @@
         this.count++
         if (this.count === this.total) {
           this.isOpenChange()
-          setTimeout(() => {
-            this.showItem = true
-          }, 200 * this.total)
           this.count = 0
         }
       },
@@ -132,6 +129,9 @@
         this.currentIndex = index
       },
       isOpenChange () {
+        if (!this.isOpen && !this.showItem) {
+          this.showItem = true
+        }
         this.isOpen = !this.isOpen
       },
       setAmination () {
