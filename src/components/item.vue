@@ -38,7 +38,7 @@
       opacity .28s cubic-bezier(.4, 0, .2, 1)
       background-position center center
       background-repeat no-repeat
-      opacity 0.8
+      /*opacity 0.8*/
       outline none
       &:hover
         box-shadow 0 8px 17px 0 rgba(0, 0, 0, .2)
@@ -104,8 +104,8 @@
           animationName: 'contract-item-' + this.index,
           animationFillMode: 'forwards',
           animationDuration: +this.animationDuration + 's',
-          animationDelay: this.itemAnimationDelay,
-          animationTimingFunction: 'ease-out'
+          animationDelay: this.itemAnimationDelay + 's',
+          animationTimingFunction: 'ease-in'
         }
       }
 
@@ -209,10 +209,10 @@
           'transform: translate(' + this.x0 + 'px,' + this.y0 + 'px)' +
           '}' +
           '30% {' +
-          'transform: translate(' + this.x1 + 'px,' + this.y1 + 'px)' +
+          'transform: translate(' + this.x2 + 'px,' + this.y2 + 'px)' +
           '}' +
           '0% {' +
-          'transform: translate(' + this.x2 + 'px,' + this.y2 + 'px)' +
+          'transform: translate(' + this.x1 + 'px,' + this.y1 + 'px)' +
           '}' +
           '}\n'
         }
