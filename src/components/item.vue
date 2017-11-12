@@ -1,6 +1,6 @@
 <template>
     <li class="item" ref="item" :style="styleArr" @click="changeShowItem">
-      <transition :name="'item-selected'">
+      <transition :name="currentIndex === index?'item-selected':'item-not-selected'">
         <div class="item-wrapper" v-show="showItem" :ref="'item'+index" @animationend="animationEnd">
           <button class="item-btn" :class="[icon]"></button>
         </div>
@@ -48,6 +48,11 @@
   animation-name select-item
   animation-duration animationDuriation
   animation-fill-mode forwards
+.item-not-selected-leave-active
+  animation-name not-select-item
+  animation-duration animationDuriation
+  animation-fill-mode forwards
+
 @keyframes select-item {
   0% {
     transform scale(1)
@@ -55,6 +60,16 @@
   }
   100% {
     transform scale(2)
+    opacity 0
+  }
+}
+@keyframes not-select-item {
+  0% {
+    transform scale(1)
+    opacity 1
+  }
+  100% {
+    transform scale(0.5)
     opacity 0
   }
 }
@@ -72,7 +87,8 @@
       icon: String,
       showItem: Boolean,
       isOpen: Boolean,
-      total: Number
+      total: Number,
+      currentIndex: Number
     },
     data () {
       return {
@@ -162,7 +178,7 @@
         this.$emit('animationCountIncrease')
       },
       changeShowItem () {
-        this.$emit('showItemChange')
+        this.$emit('showItemChange', this.index)
 //        this.$emit('isOpenChange')
       },
       itemClicked () {

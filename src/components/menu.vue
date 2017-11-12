@@ -17,9 +17,10 @@
          :showItem="showItem"
          :isOpen="isOpen"
          :total="iconImgArr.length"
+         :currentIndex="currentIndex"
           v-on:showItemChange="showItemChange"
           v-on:isOpenChange="isOpenChange"
-          v-on:animationCountIncrease="animationCountIncrease"
+          v-on:animationCountIncrease=" (val) => {animationCountIncrease(val)}"
       >
       </menu-item>
     </ul>
@@ -84,7 +85,8 @@
         showItem: true,
         isOpen: false,
         total: this.iconImgArr.length,
-        count: 0
+        count: 0,
+        currentIndex: -1
       }
     },
 
@@ -139,8 +141,9 @@
       menuClose () {
 
       },
-      showItemChange () {
+      showItemChange (index) {
         this.showItem = false
+        this.currentIndex = index
 //        this.$nextTick(() => {
 //          this.showItem = true
 //        })
