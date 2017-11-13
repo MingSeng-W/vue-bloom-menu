@@ -1,8 +1,8 @@
 {
-  "name": "sell",
+  "name": "vue-bloom-menu",
   "version": "1.0.0",
-  "description": "sell app",
-  "author": "<simonzhangr@foxmail.com>",
+  "description": "this is a vue menu",
+  "author": "<wanghongjieUESTC@outlook.com>",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
