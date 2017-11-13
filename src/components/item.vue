@@ -155,9 +155,7 @@
           this.styleArr.push(this.itemExpandAnimationStyle)
         } else {
           this.styleArr.pop()
-//          if (!this.showItem) {
           this.styleArr.push(this.itemContractAnimationStyle)
-//          }
         }
 
       }
@@ -166,30 +164,17 @@
     mounted () {
       this.insertStyleSheet()
     },
-    created () {
-
-    },
-    beforeUpdated () {
-//      this.itemClicked()
-    },
     methods: {
       animationEnd() {
         this.$emit('animationCountIncrease')
       },
       changeShowItem () {
         this.$emit('showItemChange', this.index)
-//        this.$emit('isOpenChange')
-      },
-      itemClicked () {
-//        if (!this.$store.state.isOpen && !this.showItem) {
-//          this.$emit('showItemChange')
-//
-//        }
       },
       toRadians (angle) {
         return angle * (Math.PI / 180)
       },
-      generateBaseKeyFrame (stage, index) {
+      generateBaseKeyFrame (stage) {
         let str = ''
         if (stage === 'expand-item-') {
           str = stage + this.index + '{' +
@@ -226,26 +211,9 @@
         '}\n'
         return str
       },
-      generateSelectItemKeyFrame () {
-//
-//        '.item :nth-of-type(&{(index + 1)} ).is-selected . item-wrapper {' +
-//        'animation-name:   select-item; +
-//        'animation-fill-mode: forwards;' +
-//        'animation-duration: ' + props.animationDuration + 's;' +
-//        'animation-timing-function: ease-out;' +
-//        '}' +
-//        '.' + cssClassPrefix + ITEM_CSS_CLASS + ':nth-of-type(' + (index + 1) + ').is-selected .' + cssClassPrefix + ITEM_BTN_WRAPPER_CSS_CLASS + ' {' +
-//        '-webkit-animation-name: ' + cssClassPrefix + 'select-item;' +
-//        '-webkit-animation-fill-mode: forwards;' +
-//        '-webkit-animation-duration: ' + props.animationDuration + 's;' +
-//        '-webkit-animation-timing-function: ease-out;' +
-//        '}'
-
-      },
-
       insertStyleSheet () {
-        let cssRule = this.generateBaseKeyFrame('expand-item-', this.index)
-        cssRule += this.generateBaseKeyFrame('contract-item-', this.index)
+        let cssRule = this.generateBaseKeyFrame('expand-item-')
+        cssRule += this.generateBaseKeyFrame('contract-item-')
         cssRule += this.genetateAnimateDetail()
         let style = document.createElement('style')
         style.type = 'text/css'
@@ -253,7 +221,6 @@
         document.head.appendChild(style)
 
       }
-
     }
 
   }

@@ -12,7 +12,7 @@
          :index="itemIndex"
          :angleCur="startAngle+angleStep*itemIndex"
          :animationDuration="animationDuration"
-         :itemAnimationDelay="0 + (itemIndex * 0.08)"
+         :itemAnimationDelay="0 + (itemIndex * itemAnimationDelay)"
          :icon="'icon-'+item.iconName"
          :showItem="showItem"
          :isOpen="isOpen"
@@ -23,17 +23,12 @@
           v-on:animationCountIncrease=" (val) => {animationCountIncrease(val)}"
       >
       </menu-item>
+
     </ul>
   </div>
 </template>
 <style lang="stylus" type="text/stylus">
 .menu-container
-  position absolute
-  top 50%
-  right 50%
-  width 50px
-  height 50px
-  transform 50% 50%
   user-select none
   border-radius 50%
   transition box-shadow .28s cubic-bezier(.4, 0, .2, 1)
@@ -76,7 +71,6 @@
       itemAnimationDelay: Number,
       animationDuration: Number,
       endAngle: Number,
-      itemWidth: Number,
       itemNum: Number,
       iconImgArr: Array
     },
