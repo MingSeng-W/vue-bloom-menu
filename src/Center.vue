@@ -1,18 +1,20 @@
 <style lang="stylus" type="text/stylus">
-  @import "common/stylus/base.styl"
+  @import "common/stylus/menuConfig.styl"
 </style>
 <template>
   <div>
     <Bloom-menu
       :iconImgArr="iconImgArr"
-      :radius="radius"
-      :startAngle="startAngle"
-      :endAngle="endAngle"
-      :itemNum="itemNum"
-      :animationDuration="animationDuration"
-      :itemAnimationDelay="itemAnimationDelay"
       class="menu-center-wrapper"
+      :radius="100"
     >
+      <!--可配置参数,默认有缺省值-->
+      <!--:radius="radius"-->
+      <!--:startAngle="startAngle"-->
+      <!--:endAngle="endAngle"-->
+      <!--:itemNum="itemNum"-->
+      <!--:animationDuration="animationDuration"-->
+      <!--:itemAnimationDelay="itemAnimationDelay"-->
     </Bloom-menu>
   </div>
 
@@ -29,32 +31,15 @@
   import lock from 'common/img/lock.svg'
   import accessibility from 'common/img/accessibility.svg'
   import findInPage from 'common/img/find-in-page.svg'
-  // 一些基本配置参数
-  // 半径
-  const radius = 100
-  // item的开始角度
-  const startAngle = 0
-  // menu的结束角度
-  const endAngle = 315
-  // 项目数量
-  const itemNum = 8
-  const animationDuration = 0.5
-  const itemAnimationDelay = 0.04
-
   export default {
     data() {
       return {
-        radius: radius,
-        startAngle: startAngle,
-        endAngle: endAngle,
-        itemNum: itemNum,
-        animationDuration: animationDuration,
-        itemAnimationDelay: itemAnimationDelay
       }
     },
     computed: {
       iconImgArr () {
         let tmp = []
+        // 分别指定图标,名称， 以及background-size属性
         tmp.push(this.genarateIconObj(home, 'home', '50'))
         tmp.push(this.genarateIconObj(grade, 'grade', '50'))
         tmp.push(this.genarateIconObj(languge, 'languge', '50'))

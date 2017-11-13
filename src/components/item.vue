@@ -10,7 +10,7 @@
 </template>
 
 <style lang="stylus" type="text/stylus">
-@import "../common/stylus/variable.styl"
+@import "../common/stylus/menuConfig.styl"
 .item
   opacity 1
   position absolute

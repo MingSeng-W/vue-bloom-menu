@@ -1,16 +1,13 @@
 <style lang="stylus" type="text/stylus">
-@import "common/stylus/base.styl"
+@import "common/stylus/menuConfig.styl"
 </style>
 <template>
   <div>
     <Bloom-menu
       :iconImgArr="iconImgArr"
-      :radius="radius"
-      :startAngle="startAngle"
-      :endAngle="endAngle"
-      :itemNum="itemNum"
-      :animationDuration="animationDuration"
-      :itemAnimationDelay="itemAnimationDelay"
+      :startAngle="-90"
+      :endAngle="0"
+      :itemNum="4"
       class="menu-left-corner-wrapper"
     >
     </Bloom-menu>
@@ -29,27 +26,10 @@
   import lock from 'common/img/lock.svg'
   import accessibility from 'common/img/accessibility.svg'
   import findInPage from 'common/img/find-in-page.svg'
-  // 一些基本配置参数
-  // 半径
-  const radius = 100
-  // item的开始角度
-  const startAngle = -90
-  // menu的结束角度
-  const endAngle = 0
-  // 项目数量
-  const itemNum = 4
-  const animationDuration = 0.5
-  const itemAnimationDelay = 0.04
 
   export default {
     data() {
       return {
-        radius: radius,
-        startAngle: startAngle,
-        endAngle: endAngle,
-        itemNum: itemNum,
-        animationDuration: animationDuration,
-        itemAnimationDelay: itemAnimationDelay
       }
     },
     computed: {

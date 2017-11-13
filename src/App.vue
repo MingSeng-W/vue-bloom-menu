@@ -24,6 +24,7 @@
       line-height 30px
       font-size 15px
       border-radius 10px
+      text-align center
       background-color #6b9eb8
 </style>
 <script type="text/ecmascript-6">

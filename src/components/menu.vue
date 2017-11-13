@@ -66,12 +66,24 @@
   import item from './item.vue'
   export default {
     props: {
-      startAngle: Number,
-      radius: Number,
-      itemAnimationDelay: Number,
-      animationDuration: Number,
-      endAngle: Number,
-      itemNum: Number,
+      startAngle: {
+        default: 0
+      },
+      radius: {
+        default: 160
+      },
+      itemAnimationDelay: {
+        default: 0.04
+      },
+      animationDuration: {
+        default: 0.5
+      },
+      endAngle: {
+        default: 315
+      },
+      itemNum: {
+        default: 8
+      },
       iconImgArr: Array
     },
     data () {
