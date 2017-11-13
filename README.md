@@ -1,9 +1,9 @@
 # vue-bloom-menu
-> #####inspired by blooming-menu
+> ##### inspired by blooming-menu
 ##### 这是一个使用vue加css动画制作的menu，基于其他插件改写成vue的实现方式，可以用作菜单导航栏，后期加上vue-router,稍后把详细教程写在博客里
 
 
-##技术栈:vue+vue-router+webpack
+## 技术栈:vue+vue-router+webpack
 
 #### [在线演示地址](https://mingseng-w.github.io/vue-bloom-menu/)
 ----
@@ -11,12 +11,17 @@
 ### 实例效果演示
 
  1. 点击menu的button之后的效果
-![菜单menu点击演示](./doc/img/menu.gif)
+![菜单menu点击演示](./doc/img/pic_1.gif)
 
  2. 点击item之后的效果
-![点击item之后的效果](./doc/img/item.gif)
 
- 3. 加上vue-router之后的应用(pending)
+![点击item之后的效果](./doc/img/pic2.gif)
+
+ 3.left corner
+ 
+ ![left corner](./doc/img/pic_3.gif)
+
+ 4.加上vue-router之后的menu(pending)
 
 ### get started
 ----
@@ -76,10 +81,11 @@ example:
  		
 ### key step 
 ----
-	to be countinue
-#### about author
+关键步骤写在博客里面了
+	[简书]()
+### about author
 ---
-　　欢迎拍砖，email:wanghongjieUESTC@outlook.com,如果你觉得对您有帮助，请给我个star🙂
+　　有问题邮件联系我，email:wanghongjieUESTC@outlook.com,如果您觉得对您有帮助，请给我个star🙂
 
 
 
