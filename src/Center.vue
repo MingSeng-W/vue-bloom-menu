@@ -21,7 +21,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import menu from 'components/menu.vue'
+  import menu from 'components/Menu/menu.vue'
   // 图片的icon
   import home from 'common/img/home.svg'
   import favorite from 'common/img/favorite.svg'

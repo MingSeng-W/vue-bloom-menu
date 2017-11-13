@@ -16,16 +16,12 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import menu from 'components/menu.vue'
+  import menu from 'components/Menu/menu.vue'
   // 图片的icon
   import home from 'common/img/home.svg'
-  import favorite from 'common/img/favorite.svg'
-  import getApp from 'common/img/get-app.svg'
   import grade from 'common/img/grade.svg'
   import languge from 'common/img/language.svg'
   import lock from 'common/img/lock.svg'
-  import accessibility from 'common/img/accessibility.svg'
-  import findInPage from 'common/img/find-in-page.svg'
 
   export default {
     data() {

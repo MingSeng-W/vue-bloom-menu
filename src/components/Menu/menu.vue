@@ -63,7 +63,7 @@
 </style>
 <script type="text/ecmascript-6">
   import Vue from 'vue'
-  import item from './item.vue'
+  import item from './Item/item.vue'
   export default {
     props: {
       startAngle: {
