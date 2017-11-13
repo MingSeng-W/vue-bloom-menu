@@ -23,7 +23,7 @@
   .item-wrapper
     width 100%
     height 100%
-    background-color #6B9EB8
+    background-color #d8dde0
     border-radius 50%
 
     .item-btn

@@ -23,14 +23,14 @@
 <script type="text/ecmascript-6">
   import menu from 'components/Menu/menu.vue'
   // 图片的icon
-  import home from 'common/img/home.svg'
-  import favorite from 'common/img/favorite.svg'
-  import getApp from 'common/img/get-app.svg'
-  import grade from 'common/img/grade.svg'
-  import languge from 'common/img/language.svg'
-  import lock from 'common/img/lock.svg'
-  import accessibility from 'common/img/accessibility.svg'
-  import findInPage from 'common/img/find-in-page.svg'
+  import house from 'common/icon/house.svg'
+  import datas from 'common/icon/data.svg'
+  import info from 'common/icon/info.svg'
+  import money from 'common/icon/money.svg'
+  import phone from 'common/icon/phone.svg'
+  import user from 'common/icon/user.svg'
+  import card from 'common/icon/card.svg'
+  import liuyangtiao from 'common/icon/liuyangtiao.svg'
   export default {
     data() {
       return {
@@ -40,14 +40,14 @@
       iconImgArr () {
         let tmp = []
         // 分别指定图标,名称， 以及background-size属性
-        tmp.push(this.genarateIconObj(home, 'home', '50'))
-        tmp.push(this.genarateIconObj(grade, 'grade', '50'))
-        tmp.push(this.genarateIconObj(languge, 'languge', '50'))
-        tmp.push(this.genarateIconObj(lock, 'lock', '35'))
-        tmp.push(this.genarateIconObj(getApp, 'getApp', '35'))
-        tmp.push(this.genarateIconObj(findInPage, 'findInPage', '40'))
-        tmp.push(this.genarateIconObj(favorite, 'favorite', '50'))
-        tmp.push(this.genarateIconObj(accessibility, 'accessibility', '50'))
+        tmp.push(this.genarateIconObj(house, 'house', '50'))
+        tmp.push(this.genarateIconObj(datas, 'datas', '50'))
+        tmp.push(this.genarateIconObj(info, 'info', '50'))
+        tmp.push(this.genarateIconObj(money, 'money', '50'))
+        tmp.push(this.genarateIconObj(phone, 'phone', '50'))
+        tmp.push(this.genarateIconObj(user, 'user', '50'))
+        tmp.push(this.genarateIconObj(card, 'card', '50'))
+        tmp.push(this.genarateIconObj(liuyangtiao, 'liuyangtiao', '50'))
         return tmp
       }
     },

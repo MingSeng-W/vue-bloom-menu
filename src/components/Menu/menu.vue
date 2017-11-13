@@ -47,7 +47,7 @@
       cursor pointer
       transition all .28s cubic-bezier(.4, 0, .2, 1)
       border none
-      background-color #A974A2
+      background-color #74a982
       color white
       outline none
       &.btn-active
@@ -98,7 +98,6 @@
 
     computed: {
       angleStep () {
-        console.log((this.endAngle - this.startAngle) / (this.itemNum - 1))
         return (this.endAngle - this.startAngle) / (this.itemNum - 1)
       }
     },
