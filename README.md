@@ -18,7 +18,7 @@
 ![点击item之后的效果](./doc/img/pic2.gif)
 
  3.left corner
- 
+
  ![left corner](./doc/img/pic_3.gif)
 
  4.加上vue-router之后的menu(pending)
@@ -32,7 +32,7 @@
 
 ### usage
  -----
-##### 模板部分     	 
+##### 模板部分
 ```html
 <template>
   <div>
@@ -49,9 +49,9 @@
     </Bloom-menu>
   </div>
 
-</template>			
+</template>
 ```
-##### css部分	
+##### css部分
 ```css
 @import 'common/stylus/menuConfig.styl'
 ```
@@ -63,7 +63,7 @@
 		*  animationDuration:default为0.5s
 		*  itemAnimationDelay:default为0.04s
 		*  iconImgArr: 必选参数，该属性使用computed属性生成,是装icon的数组,方便使用自己的icon,元素为object，使用函数genarateIconObj生成
-	
+
 ```javascript
 example:
 	  import home from 'common/img/home.svg'
@@ -74,18 +74,18 @@ example:
         tmp.push(this.genarateIconObj(home, 'home', '50'))
         return tmp
       }
-    },      	
+    },
 		 // 分别指定图标的url ,类名称， 以及background-size属性
       	 genarateIconObj (url, name, size)
 ```
- 		
-### key step 
+
+### key step
 ----
 关键步骤写在博客里面了
-	[简书]()
+	[简书](http://www.jianshu.com/p/1c60817f605c)
 ### about author
 ---
-　　有问题邮件联系我，email:wanghongjieUESTC@outlook.com,如果您觉得对您有帮助，请给我个star🙂
+　　有问题请邮件联系我，email:wanghongjieUESTC@outlook.com,如果您觉得对您有帮助，请给我个star🙂
 
 
 
